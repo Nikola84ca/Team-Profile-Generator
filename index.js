@@ -87,6 +87,27 @@ function promptUser() {
     inquirer
       .prompt([
         // will hadd questions here
+        
+        {
+            type: 'input',
+            name: 'name',
+            message: 'Enter the name of the engineer:',
+          },
+          {
+            type: 'input',
+            name: 'id',
+            message: 'Enter the ID of the engineer:',
+          },
+          {
+            type: 'input',
+            name: 'email',
+            message: 'Enter the email address of the engineer:',
+          },
+          {
+            type: 'input',
+            name: 'github',
+            message: 'Enter the GitHub profile of the engineer:',
+          },
       ])
       .then((answers) => {
         const engineer = new Engineer(
@@ -104,7 +125,27 @@ function promptUser() {
   function promptIntern() {
     inquirer
       .prompt([
-        // Questions here
+           
+        {
+            type: 'input',
+            name: 'name',
+            message: 'Enter the name of the intern:',
+          },
+          {
+            type: 'input',
+            name: 'id',
+            message: 'Enter the ID of the intern:',
+          },
+          {
+            type: 'input',
+            name: 'email',
+            message: 'Enter the email address of the intern:',
+          },
+          {
+            type: 'input',
+            name: 'school',
+            message: 'Enter the school of the intern:',
+          },
       ])
       .then((answers) => {
         const intern = new Intern(
@@ -118,3 +159,12 @@ function promptUser() {
       });
   }
   
+  // Function to generate HTML and write it to a file
+function generateHTML() {
+    const htmlContent = render(team);
+    fs.writeFileSync(outputPath, htmlContent);
+    console.log(`HTML file generated at ${outputPath}`);
+  }
+  
+  // Start the application by prompting for the team manager's information
+  promptManager();
