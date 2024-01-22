@@ -82,3 +82,39 @@ function promptUser() {
       });
   }
   
+  // Function to prompt user for engineer details
+  function promptEngineer() {
+    inquirer
+      .prompt([
+        // will hadd questions here
+      ])
+      .then((answers) => {
+        const engineer = new Engineer(
+          answers.name,
+          answers.id,
+          answers.email,
+          answers.github
+        );
+        team.push(engineer);
+        promptUser(); // Recursive call to promptUser to continue adding team members
+      });
+  }
+  
+  // Function to prompt user for intern details
+  function promptIntern() {
+    inquirer
+      .prompt([
+        // Questions here
+      ])
+      .then((answers) => {
+        const intern = new Intern(
+          answers.name,
+          answers.id,
+          answers.email,
+          answers.school
+        );
+        team.push(intern);
+        promptUser(); // Recursive call to promptUser to continue adding team members
+      });
+  }
+  
