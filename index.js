@@ -158,12 +158,22 @@ function promptUser() {
         promptUser(); // Recursive call to promptUser to continue adding team members
       });
   }
+
+  function writeToFile(fileName, data) {
+    fs.writeFileSync(fileName, data);
+}
+
   
   // Function to generate HTML and write it to a file
 function generateHTML() {
     const htmlContent = render(team);
-    fs.writeFileSync(outputPath, htmlContent);
-    console.log(`HTML file generated at ${outputPath}`);
+    
+    writeToFile('TEAM.html', htmlContent);
+      
+    console.log('TEAM.html successfully generated!');
+
+
+
   }
   
   // Start the application by prompting for the team manager's information
