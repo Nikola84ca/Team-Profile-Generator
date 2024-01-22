@@ -54,4 +54,31 @@ function promptManager() {
         promptUser();
       });
   }
+
+
+  // Function to prompt user for team members
+function promptUser() {
+    inquirer
+      .prompt([
+        {
+          type: 'checkbox',
+          name: 'newmember',
+          message: 'Select an option:',
+          choices: [
+            'Add a new engineer',
+            'Add a new intern',
+            'Finish building the team',
+          ],
+        },
+      ])
+      .then((data) => {
+        if (data.newmember.includes('Add a new engineer')) {
+          promptEngineer();
+        } else if (data.newmember.includes('Add a new intern')) {
+          promptIntern();
+        } else if (data.newmember.includes('Finish building the team')) {
+          generateHTML();
+        }
+      });
+  }
   
