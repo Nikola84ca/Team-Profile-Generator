@@ -15,7 +15,7 @@ const render = require("./src/page-template.js");
 
 const team = [];
 
-// This function will gather the information about the team manager
+// This function will gather the information about the team manager, I decided to implement the validation inside the inquirer to optimise the function
 
 function promptManager() {
     inquirer
@@ -70,7 +70,7 @@ function promptManager() {
   }
 
 
-  // Function to prompt user for team members
+  // Function to prompt user for team members, I used a checkbox so that the user can select the correct option
 function promptUser() {
     inquirer
       .prompt([
@@ -96,7 +96,7 @@ function promptUser() {
       });
   }
   
-  // Function to prompt user for engineer details
+  // Function to prompt user for engineer details, in this case as well I decided to implement the validation inside the inquirer to optimise the function
   function promptEngineer() {
     inquirer
       .prompt([
@@ -148,11 +148,11 @@ function promptUser() {
           answers.github
         );
         team.push(engineer);
-        promptUser(); // Recursive call to promptUser to continue adding team members
+        promptUser(); // Here I call the promptUser to continue adding team members
       });
   }
   
-  // Function to prompt user for intern details
+  // Function to prompt user for intern details, here too I decided to implement the validation inside the inquirer to optimise the function
   function promptIntern() {
     inquirer
       .prompt([
@@ -204,7 +204,7 @@ function promptUser() {
           answers.school
         );
         team.push(intern);
-        promptUser(); // Recursive call to promptUser to continue adding team members
+        promptUser(); // Here I call the promptUser to continue adding team members
       });
   }
 
@@ -223,5 +223,5 @@ function generateHTML() {
 
   }
   
-  // Start the application by prompting for the team manager's information
+  // Finally I start the application by prompting for the team manager's information
   promptManager();
