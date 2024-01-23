@@ -100,27 +100,44 @@ function promptUser() {
   function promptEngineer() {
     inquirer
       .prompt([
-        // will hadd questions here
-        
+                
         {
             type: 'input',
             name: 'name',
             message: 'Enter the name of the engineer:',
+            validate: (input) => {
+                const isValid = /^[a-zA-Z\s]+$/.test(input.trim());
+                return isValid || 'Please enter a valid name containing only letters.';
+              }
           },
           {
             type: 'input',
             name: 'id',
             message: 'Enter the ID of the engineer:',
+            validate: (input) => {
+              const isValid = /^\d+$/.test(input.trim());
+              return isValid || 'Please enter a valid ID (numeric characters only).';
+            },
           },
           {
             type: 'input',
             name: 'email',
             message: 'Enter the email address of the engineer:',
+            validate: (input) => {
+              const isValid = /\S+@\S+\.\S+/.test(input.trim());
+              return isValid || 'Please enter a valid email address.';
+            },
           },
           {
             type: 'input',
             name: 'github',
             message: 'Enter the GitHub profile of the engineer:',
+            validate: (input) => {
+              if (/^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$/.test(input.trim())) {
+                return true;
+              }
+              return 'Please enter a valid GitHub username.';
+            },
           },
       ])
       .then((answers) => {
@@ -144,21 +161,39 @@ function promptUser() {
             type: 'input',
             name: 'name',
             message: 'Enter the name of the intern:',
+            validate: (input) => {
+                const isValid = /^[a-zA-Z\s]+$/.test(input.trim());
+                return isValid || 'Please enter a valid name containing only letters.';
+              }
           },
           {
             type: 'input',
             name: 'id',
             message: 'Enter the ID of the intern:',
+            validate: (input) => {
+              const isValid = /^\d+$/.test(input.trim());
+              return isValid || 'Please enter a valid ID (numeric characters only).';
+            },
           },
           {
             type: 'input',
             name: 'email',
             message: 'Enter the email address of the intern:',
+            validate: (input) => {
+              const isValid = /\S+@\S+\.\S+/.test(input.trim());
+              return isValid || 'Please enter a valid email address.';
+            },
           },
           {
             type: 'input',
             name: 'school',
             message: 'Enter the school of the intern:',
+            validate: (input) => {
+              if (input.trim() !== '') {
+                return true;
+              }
+              return 'Please enter a valid school name.';
+            },
           },
       ])
       .then((answers) => {
