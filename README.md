@@ -106,10 +106,116 @@ module.exports = Engineer;
 const team = [];
 ```
 
-* The 
+* Then I started with the first function that prompts the user the questions to input the data for the Team Manager. This funcn will gather the information about the team manager, and I decided to implement the validation inside the inquirer to optimise the function, it will then pass the answers to the consta manager, which is a "new" manager element that will be pushed into the team object. Here is the code: 
 
 ```JavaScript
+function promptManager() {
+    inquirer
+      .prompt([
+       
+        {
+            type: 'input',
+            name: 'name',
+            message: 'Enter the manager\'s name:',
+            validate: (input) => {
+                const isValid = /^[a-zA-Z\s]+$/.test(input.trim());
+                return isValid || 'Please enter a valid name containing only letters.';
+              }},
+          {
+            type: 'input',
+            name: 'id',
+            message: 'Enter the manager\'s employee ID:',
+            validate: (input) => {
+              const isValid = /^\d+$/.test(input);
+              return isValid || 'Please enter a valid numeric employee ID.';
+            },
+          },
+          {
+            type: 'input',
+            name: 'email',
+            message: 'Enter the manager\'s email:',
+            validate: (input) => {
+              const isValid = /\S+@\S+\.\S+/.test(input);
+              return isValid || 'Please enter a valid email address.';
+            },
+          },
+          {
+            type: 'input',
+            name: 'officeNumber',
+            message: 'Enter the manager\'s office number:',
+            validate: (input) => {
+              const isValid = /^\d+$/.test(input);
+              return isValid || 'Please enter a valid numeric office number.';
+            },
+          },
+        ])
+      .then((answers) => {
+        const manager = new Manager(
+          answers.name,
+          answers.id,
+          answers.email,
+          answers.officeNumber
+        );
+        team.push(manager);
+        promptUser();
+      });
+  }
+```
 
+* At the end of each function to prompt the team mebers I need to ask if the user wants to insert  nea member of stop and create the html file. So I created the promptUser function. This function asks user for team members, I used a checkbox so that the user can select the correct option. Here is the code:
+
+```JavaScript
+function promptUser() {
+    inquirer
+      .prompt([
+        {
+          type: 'checkbox',
+          name: 'newmember',
+          message: 'Select an option:',
+          choices: [
+            'Add a new engineer',
+            'Add a new intern',
+            'Finish building the team',
+          ],
+        },
+      ])
+      .then((data) => {
+        if (data.newmember.includes('Add a new engineer')) {
+          promptEngineer();
+        } else if (data.newmember.includes('Add a new intern')) {
+          promptIntern();
+        } else if (data.newmember.includes('Finish building the team')) {
+          generateHTML();
+        }
+      });
+  }
+```
+
+* Similarly to promptManager function, I created the promptIntern and promptEngineer functions. Then, once I gathered all the data into the team object I needed to create the html file. First I needed a function to write the file:
+
+```JavaScript
+  function writeToFile(fileName, data) {
+    fs.writeFileSync(fileName, data);
+}
+```
+
+* I used the writeToFile function to create the team.html file passing to the constant htmlContent the object team containing all the user inputs.
+
+```JavaScript
+function generateHTML() {
+    const htmlContent = render(team);
+    
+    writeToFile('team.html', htmlContent);
+      
+    console.log('team.html successfully generated!');
+
+  }
+```
+
+* Finally I start the application by prompting for the team manager's information
+
+```JavaScript
+promptManager();
 ```
 
 
