@@ -21,27 +21,41 @@ function promptManager() {
     inquirer
       .prompt([
        
-            {
-                type: 'input',
-                name: 'name',
-                message: 'Enter your name:',
-              },
-              {
-                type: 'input',
-                name: 'id',
-                message: 'Enter your Employee ID:',
-              },
-              {
-                type: 'input',
-                name: 'email',
-                message: 'Enter your email address:',
-              },
-              {
-                type: 'input',
-                name: 'officeNumber',
-                message: 'Enter your office number:',
-              },
-        
+        {
+            type: 'input',
+            name: 'name',
+            message: 'Enter the manager\'s name:',
+            validate: (input) => {
+                const isValid = /^[a-zA-Z\s]+$/.test(input.trim());
+                return isValid || 'Please enter a valid name containing only letters.';
+              }},
+          {
+            type: 'input',
+            name: 'id',
+            message: 'Enter the manager\'s employee ID:',
+            validate: (input) => {
+              const isValid = /^\d+$/.test(input);
+              return isValid || 'Please enter a valid numeric employee ID.';
+            },
+          },
+          {
+            type: 'input',
+            name: 'email',
+            message: 'Enter the manager\'s email:',
+            validate: (input) => {
+              const isValid = /\S+@\S+\.\S+/.test(input);
+              return isValid || 'Please enter a valid email address.';
+            },
+          },
+          {
+            type: 'input',
+            name: 'officeNumber',
+            message: 'Enter the manager\'s office number:',
+            validate: (input) => {
+              const isValid = /^\d+$/.test(input);
+              return isValid || 'Please enter a valid numeric office number.';
+            },
+          },
         ])
       .then((answers) => {
         const manager = new Manager(
