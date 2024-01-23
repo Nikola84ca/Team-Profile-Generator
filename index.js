@@ -168,11 +168,9 @@ function promptUser() {
 function generateHTML() {
     const htmlContent = render(team);
     
-    writeToFile('TEAM.html', htmlContent);
+    writeToFile('team.html', htmlContent);
       
-    console.log('TEAM.html successfully generated!');
-
-
+    console.log('team.html successfully generated!');
 
   }
   
