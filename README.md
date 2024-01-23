@@ -1,7 +1,7 @@
 # Team-Profile-Generator
 
 
-Project and development of a node.js application that will allow users to quickly create a README file through the prompt.
+Project and development of a node.js application that will allow users to quickly create a team html page through the prompt.
 
 
 ## About Me 
@@ -14,9 +14,9 @@ To use this app, simply follow the instructions in the Installation paragraph be
 ```bash
 node index.js
 ```
-Once the program has been lounched just follow the instructions and input the data you want to include in your README file. Here is a video of the step-by-step procedure to generate your README file:
+Once the program has been lounched just follow the instructions and input the data you want to complete your Team. Here is an example of the prompt to generate an html file for your team:
 
-![Gif animation of how to use the ReadMe File Generator app](/Images/ReadMe-Generator.gif)
+![Gif animation of how to use the ReadMe File Generator app](/Images/TEAMhtml-Prompt.JPG)
 
 ## Installation
 First, make sure that Git and Git Bash are installed on your system. To download this project on your machine click [HERE](https://github.com/Nikola84ca/Team-Profile-Generator) to go to the repository on GitHub. Click on the green CODE button, and copy the link of the repository. In your machine, open gitBash and create a new folder where you will clone the project using the command below:
@@ -42,14 +42,68 @@ alternatively download the zip file in GitHub after pressing the Code button, un
 
 ## App Description 
 
-The README file generator app will run in the prompt of commands allowing users to quickly generate and complete their README file simply launching the index.js file and following the shown instruction, writing the project title, description, usage, process etc information that will be then ordered and written into the generated README file. This app will fasten up the process and will create a well formatted README file in the project folder.
+The Team file generator app will run in the prompt of commands allowing users to quickly generate and complete their Team page simply launching the index.js file and following the shown instruction, writing the names and information for each team member etc information that will be then ordered and written into the generated team.html file. 
 
 ## My Process
 
-* The first thing that was required was to 
+* The first thing that was required was to implement the class Employee, which is the main class that will then be inherited by the specific employees (Manager, Intern, Engineer).
 
 ```JavaScript
+class Employee {
+    constructor(name, id, email) {
+      this.name = name;
+      this.id = id;
+      this.email = email;
+    }
+  
+    getName() {
+      return this.name;
+    }
+  
+    getId() {
+      return this.id;
+    }
+  
+    getEmail() {
+      return this.email;
+    }
+  
+    getRole() {
+      return 'Employee';
+    }
+  }
+  
+  module.exports = Employee;
 
+```
+
+* I then created a class for each specific emloyee, making sure they inherit the main constructors from Employee. Here is an example, this is the class Engineer, that inherits Employee class, as you can see, each specific employee has some extra info, in this case we have the GitHib profile:
+
+```JavaScript
+const Employee = require('./Employee');
+
+class Engineer extends Employee {
+  constructor(name, id, email, github) {
+    super(name, id, email);
+    this.github = github;
+  }
+
+  getGithub() {
+    return this.github;
+  }
+
+  getRole() {
+    return 'Engineer';
+  }
+}
+
+module.exports = Engineer;
+```
+
+* After I created all the classes, I started implementing the index.js file, the main file that will run the application. The first thing I implemented is making sure the object team is declared
+
+```JavaScript
+const team = [];
 ```
 
 * The 
@@ -58,13 +112,15 @@ The README file generator app will run in the prompt of commands allowing users 
 
 ```
 
+
+
 ## Credits
 
 I would like to thank all the teachers and TA of the EdX bootcamp for all the content provided and study materials. I found the information needed to implement the checkbox in the [www.npmjs.com](https://www.npmjs.com/package/inquirer) website.
 
 ## Project Status and Upcoming Improvements
 
-The app is functional and easy to launch and use, the user can easily create the README file and add all the descriptions and data needed. The next step will be to include pics and gif through a link and also create a web application with a nice html/css structure that will allow users to select the directory where they want to create their README file and follow the same procedure of the prompt commands to generate it.
+The app is functional and easy to launch and use, the user can easily create the Team.html file and add all the descriptions and data needed for each team member needed. The next step will be to improve the web page created with a more user friendly html/css structure.
 
 ## Collaborations and Contributions
 
