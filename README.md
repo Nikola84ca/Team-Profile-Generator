@@ -162,6 +162,15 @@ function promptManager() {
   }
 ```
 
+* I first struggled a bit with the validation process, I researched online and found very useful articles on the [DEV](https://dev.to/bolouie/how-do-you-check-for-valid-email-input-3b3j) and [stack overflow](https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript?page=2&tab=scoredesc) websites. These expressions make sure that the user inputs are more or less similar to the expression indicated in the const isValid. Here is an example of the email validation expression:
+
+```JavaScript
+validate: (input) => {
+              const isValid = /\S+@\S+\.\S+/.test(input);
+              return isValid || 'Please enter a valid email address.';
+              }
+```
+
 * At the end of each function to prompt the team mebers I need to ask if the user wants to insert  nea member of stop and create the html file. So I created the promptUser function. This function asks user for team members, I used a checkbox so that the user can select the correct option. Here is the code:
 
 ```JavaScript
@@ -222,7 +231,7 @@ promptManager();
 
 ## Credits
 
-I would like to thank all the teachers and TA of the EdX bootcamp for all the content provided and study materials. I found the information needed to implement the checkbox in the [www.npmjs.com](https://www.npmjs.com/package/inquirer) website.
+I would like to thank all the teachers and TA of the EdX bootcamp for all the content provided and study materials. I found the information needed to implement the checkbox in the [www.npmjs.com](https://www.npmjs.com/package/inquirer) website. I also found fundamental information about the validation expressions, I researched online and found these useful articles on the [DEV](https://dev.to/bolouie/how-do-you-check-for-valid-email-input-3b3j) and [stack overflow](https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript?page=2&tab=scoredesc) websites. I then adapted them to my project to make sure the inputs from the users were correct.
 
 ## Project Status and Upcoming Improvements
 
